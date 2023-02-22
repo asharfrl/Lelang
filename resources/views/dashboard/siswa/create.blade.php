@@ -1,0 +1,119 @@
+@extends('dashboard.layout')
+
+@section('content')
+<main class="main-content position-relative border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <h6 class="font-weight-bolder text-white mt-4 mb-0">Create Data Siswa</h6>
+            </nav>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="forms-sample" method="post" action="{{ route('dataSiswa.store') }}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">NISN</label>
+                                        <input class="form-control" name="nisn" id="nisn" type="number" placeholder="Masukkan nisn ..." value="{{ old('nisn') }}" required autofocus>
+                                        @error('nisn')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">NIS</label>
+                                        <input class="form-control" name="nis" id="nis" type="number" placeholder="Masukkan nis ..." value="{{ old('nis') }}" required>
+                                        @error('nis')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Nama</label>
+                                        <input class="form-control" name="nama" id="nama" type="text" placeholder="Masukkan nama ..." value="{{ old('nama') }}" required>
+                                        @error('nama')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">ID Kelas</label>
+                                        <select class="form-control" name="id_kelas" id="id_kelas" value="{{ old('id_kelas') }}" required>
+                                            @foreach($id_kelas as $kelas)
+                                                <option value="{{$kelas->id}}" title="{{$kelas->nama_kelas}}">{{$kelas->id}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('id_kelas')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Alamat</label>
+                                        <textarea class="form-control" name="alamat" id="alamat" placeholder="Masukkan alamat ..." value="{{ old('alamat') }}" required></textarea>
+                                        @error('alamat')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">No Telp</label>
+                                        <input class="form-control" name="no_telp" id="no_telp" type="number" placeholder="Masukkan no_telp ..." value="{{ old('no_telp') }}" required>
+                                        @error('no_telp')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">ID SPP</label>
+                                        <select class="form-control" name="id_spp" id="id_spp" value="{{ old('id_spp') }}" required>
+                                            @foreach($id_spp as $spp)
+                                                <option value="{{$spp->id}}">{{$spp->id}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('id_spp')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="horizontal dark">
+                            <div class="d-flex justify-content-end mt-4">
+                                <button class="btn btn-primary btn-sm me-3">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@endsection
