@@ -29,6 +29,7 @@ Route::middleware('login')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard.dashboard');
     });
+    Route::get('dataHistory', [PembayaranController::class, 'history']);
 
     // admin
     Route::resource('dataKelas', KelasController::class)->middleware('admin');

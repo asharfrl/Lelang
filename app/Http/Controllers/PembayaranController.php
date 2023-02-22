@@ -56,6 +56,12 @@ class PembayaranController extends Controller
         return redirect()->route('dataPembayaran.index')->with('message', 'Data berhasil ditambahkan!');
     }
 
+    public function history()
+    {
+        $history = Pembayaran::all();
+        return view('dashboard.pembayaran.history', compact('history'));
+    }
+
     // export excel
     // public function export()
     // {

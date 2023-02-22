@@ -39,7 +39,7 @@
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Data</h6>
         </li>
-        {{-- @if (auth()->user()->level == 'Admin') --}}
+        @if (auth()->user()->level == 'Admin')
         <li class="nav-item">
           <a class="nav-link" href="/dataSiswa">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -72,8 +72,8 @@
             <span class="nav-link-text ms-1">SPP</span>
           </a>
         </li>
-        {{-- @endif
-        @if (auth()->user()->level == 'Admin' || 'Petugas') --}}
+        @endif
+        @if (auth()->user()->level == 'Admin' || 'Petugas')
         <li class="nav-item">
           <a class="nav-link" href="/dataPembayaran">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -82,15 +82,15 @@
             <span class="nav-link-text ms-1">Entry Pembayaran</span>
           </a>
         </li>
-        {{-- @endif --}}
-        {{-- <li class="nav-item">
+        @endif
+        <li class="nav-item">
           <a class="nav-link" href="/dataHistory">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-align-left-2 text-danger text-sm opacity-10"></i>
+              <i class="ni ni-align-left-2 text-info text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">History Pembayaran</span>
           </a>
-        </li> --}}
+        </li>
 
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Menu</h6>
