@@ -6,7 +6,7 @@
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
     <div class="container-fluid py-1 px-3">
       <nav aria-label="breadcrumb">
-        <h6 class="font-weight-bolder text-white mt-4 mb-0">Data Petugas</h6>
+        <h6 class="font-weight-bolder text-white mt-4 mb-0">Data Pembayaran</h6>
       </nav>
     </div>
   </nav>
@@ -21,7 +21,7 @@
             </div>
           @endif
           <div class="card-header pb-0 text-end">
-            <a href="/dataPetugas/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
+            <a href="/entryPembayaran/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -29,15 +29,15 @@
                 <thead>
                   <tr>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">No</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Nama Petugas</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Level</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Username</th>
-                    {{-- <th class="text-uppercase text-xs font-weight-bolder opacity-9" width="20">Password</th> --}}
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Action</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Petugas</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tanggal Bayar</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($petugas as $row)
+                  @foreach($pembayaran as $row)
                     <tr>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $loop->iteration }}
@@ -46,21 +46,16 @@
                         {{ $row->nama_petugas }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->level }}
+                        {{ $row->nisn }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->username }}
+                        {{ $row->tgl_bayar }} {{ $row->bulan_dibayar }} {{ $row->tahun_dibayar }}
                       </td>
-                      {{-- <td class="text-xs font-weight-bolder opacity-7">
-                        {{ bcrypt($row->password) }}
-                      </td> --}}
                       <td class="text-xs font-weight-bolder opacity-7">
-                        <form action="{{ route('dataPetugas.destroy',$row->id) }}" method="POST">
-                          <a href="{{ route('dataPetugas.edit', $row->id) }}" class="btn btn-sm mb-0 me-1 btn-warning">Edit</a>
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" onclick="return confirm('Apakah Anda yakin?')" class="btn btn-sm mb-0 me-1 btn-danger">Delete</button>
-                        </form>
+                        {{ number_format($row->nominal) }}
+                      </td>
+                      <td class="text-xs font-weight-bolder opacity-7">
+                        Rp {{ number_format($row->jumlah_bayar) }}
                       </td>
                     </tr>
                   @endforeach

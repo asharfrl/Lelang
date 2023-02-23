@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->char('nisn', 10);
-            $table->char('nis', 8);
-            $table->string('nama', 35);
-            $table->integer('id_kelas');
+            $table->char('nisn');
+            $table->char('nis');
+            $table->string('nama');
+            $table->string('kelas');
             $table->text('alamat');
-            $table->string('no_telp', 13);
-            $table->integer('id_spp');
+            $table->string('no_telp');
+            $table->integer('nominal');
             $table->timestamps();
         });
     }

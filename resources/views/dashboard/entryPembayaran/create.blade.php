@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="forms-sample" method="post" action="{{ route('dataPembayaran.store') }}">
+                        <form class="forms-sample" method="post" action="{{ route('entryPembayaran.store') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">

@@ -29,7 +29,6 @@
                 <thead>
                   <tr>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">No</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">ID SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tahun</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Nominal</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Action</th>
@@ -40,9 +39,6 @@
                     <tr>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $loop->iteration }}
-                      </td>
-                      <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->id }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $row->tahun }}

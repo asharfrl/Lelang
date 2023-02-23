@@ -5,8 +5,11 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\EntryPembayaranController;
 use App\Http\Controllers\SppController;
 use App\Http\Controllers\LoginController;
+use Dompdf\Dompdf;
+use App\Models\Pembayaran;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,16 @@ Route::middleware('login')->group(function () {
     });
     Route::get('dataHistory', [PembayaranController::class, 'history']);
 
+    Route::get('/generateLaporan', function () {
+        $history = Pembayaran::all();
+        $dompdf = new Dompdf();
+        $html = view('dashboard.pembayaran.pdf', compact('history'))->render();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        return $dompdf->stream('Laporan Pembayaran.pdf');
+    });
+
     // admin
     Route::resource('dataKelas', KelasController::class)->middleware('admin');
     Route::resource('dataPetugas', PetugasController::class)->middleware('admin');
@@ -39,6 +52,5 @@ Route::middleware('login')->group(function () {
     Route::resource('dataSpp', SppController::class)->middleware('admin');
 
     // petugas
-    Route::resource('dataPembayaran', PembayaranController::class)->middleware('petugas');
+    Route::resource('entryPembayaran', EntryPembayaranController::class)->middleware('petugas');
 });
-

@@ -44,10 +44,10 @@ class SiswaController extends Controller
         $siswa->nisn = $request->nisn;
         $siswa->nis = $request->nis;
         $siswa->nama = $request->nama;
-        $siswa->id_kelas = $request->id_kelas;
+        $siswa->kelas = $request->kelas;
         $siswa->alamat = $request->alamat;
         $siswa->no_telp = $request->no_telp;
-        $siswa->id_spp = $request->id_spp;
+        $siswa->nominal = $request->nominal;
         $siswa->save();
         return redirect()->route('dataSiswa.index')->with('message', 'Data berhasil ditambahkan!');
     }
@@ -90,10 +90,10 @@ class SiswaController extends Controller
         $siswa->nisn = $request->nisn;
         $siswa->nis = $request->nis;
         $siswa->nama = $request->nama;
-        $siswa->id_kelas = $request->id_kelas;
+        $siswa->kelas = $request->kelas;
         $siswa->alamat = $request->alamat;
         $siswa->no_telp = $request->no_telp;
-        $siswa->id_spp = $request->id_spp;
+        $siswa->nominal = $request->nominal;
         $siswa->save();
 
         return redirect('/dataSiswa')->with('message', 'Data berhasil diubah!');

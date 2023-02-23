@@ -73,9 +73,19 @@
           </a>
         </li>
         @endif
-        @if (auth()->user()->level == 'Admin' || 'Petugas')
+        @if (auth()->user()->level == 'Admin' )
         <li class="nav-item">
           <a class="nav-link" href="/dataPembayaran">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Entry Pembayaran</span>
+          </a>
+        </li>
+        @endif
+        @if (auth()->user()->level == 'Petugas' )
+        <li class="nav-item">
+          <a class="nav-link" href="/entryPembayaran">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>

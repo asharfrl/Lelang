@@ -21,6 +21,10 @@
                             echo date('d-m-Y');
                             echo ' &nbsp;&nbsp; <i id="h"></i> : <i id="m"></i> : <i id="s"></i>';
                         ?>
+                        <br>
+                        Halo, <b>{{ Auth::user()->nama_petugas }}</b>
+                        <br>
+                        Selamat datang kembali di Aplikasi Pembayaran SPP
                     </div>
                 </div>
             </div>

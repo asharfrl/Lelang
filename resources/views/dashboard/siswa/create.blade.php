@@ -54,13 +54,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">ID Kelas</label>
-                                        <select class="form-control" name="id_kelas" id="id_kelas" value="{{ old('id_kelas') }}" required>
+                                        <label for="example-text-input" class="form-control-label">Kelas</label>
+                                        <select class="form-control" name="kelas" id="kelas" value="{{ old('kelas') }}" required>
                                             @foreach($id_kelas as $kelas)
-                                                <option value="{{$kelas->id}}" title="{{$kelas->nama_kelas}}">{{$kelas->id}}</option>
+                                                <option value="{{$kelas->nama_kelas}}">{{$kelas->nama_kelas}}</option>
                                             @endforeach
                                         </select>
-                                        @error('id_kelas')
+                                        @error('kelas')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -91,13 +91,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">ID SPP</label>
-                                        <select class="form-control" name="id_spp" id="id_spp" value="{{ old('id_spp') }}" required>
+                                        <label for="example-text-input" class="form-control-label">SPP</label>
+                                        <select class="form-control" name="nominal" id="nominal" value="{{ old('nominal') }}" required>
                                             @foreach($id_spp as $spp)
-                                                <option value="{{$spp->id}}">{{$spp->id}}</option>
+                                                <option value="{{$spp->nominal}}">{{ number_format($spp->nominal) }}</option>
                                             @endforeach
                                         </select>
-                                        @error('id_spp')
+                                        @error('nominal')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

@@ -20,19 +20,21 @@
                 {{ session('message') }}
             </div>
           @endif
+          @if (auth()->user()->level == 'Admin')
           <div class="card-header pb-0 text-end">
-            <a href="/dataPembayaran/create" class="btn btn-sm mb-0 me-1 btn-info">Export</a>
+            <a href="/generateLaporan" class="btn btn-sm mb-0 me-1 btn-info">Export</a>
           </div>
+          @endif
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
               <table class="table align-items-center mt-4 mb-0">
                 <thead>
                   <tr>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">No</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">ID Petugas</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Petugas</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tanggal Bayar</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">ID SPP</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
                   </tr>
                 </thead>
@@ -43,7 +45,7 @@
                         {{ $loop->iteration }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->id_petugas }}
+                        {{ $row->nama_petugas }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $row->nisn }}
@@ -52,7 +54,7 @@
                         {{ $row->tgl_bayar }} {{ $row->bulan_dibayar }} {{ $row->tahun_dibayar }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->id_spp }}
+                        {{ number_format($row->nominal) }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         Rp {{ number_format($row->jumlah_bayar) }}

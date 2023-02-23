@@ -44,10 +44,10 @@
                   <form action="/" method="POST">
                     @csrf
                     <div class="mb-3">
-                      <input type="text" name="username" class="form-control form-control-lg" placeholder="Username" aria-label="Username" autofocus>
+                      <input type="text" name="username" class="form-control form-control-lg" placeholder="Username" aria-label="Username" required autofocus>
                     </div>
                     <div class="mb-3">
-                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" required>
                     </div>
                     <div class="text-center">
                       <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>

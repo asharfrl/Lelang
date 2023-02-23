@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('petugas', function (Blueprint $table) {
             $table->id();
-            $table->string('username', 25);
+            $table->string('username');
             $table->string('password');
-            $table->string('nama_petugas', 35);
+            $table->string('nama_petugas');
             $table->enum('level', ['Admin', 'Petugas', 'Siswa']);
             $table->timestamps();
         });

@@ -8,9 +8,10 @@ use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Spp;
 use Illuminate\Http\Request;
-use Dompdf\Dompdf;
+// use Maatwebsite\Excel\Facades\Excel;
+// use App\Exports\ExportLaporan;
 
-class PembayaranController extends Controller
+class EntryPembayaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class PembayaranController extends Controller
     public function index()
     {
         $pembayaran = Pembayaran::all();
-        return view('dashboard.pembayaran.index', compact('pembayaran'));
+        return view('dashboard.entryPembayaran.index', compact('pembayaran'));
     }
 
     /**
@@ -33,7 +34,7 @@ class PembayaranController extends Controller
         $nisn   = Siswa::all();
         $id_petugas = User::all();
         $id_spp = Spp::all();
-        return view('dashboard.pembayaran.create')->with('nisn', $nisn)->with('id_petugas', $id_petugas)->with('id_spp', $id_spp);
+        return view('dashboard.entryPembayaran.create')->with('nisn', $nisn)->with('id_petugas', $id_petugas)->with('id_spp', $id_spp);
     }
 
     /**
@@ -53,19 +54,7 @@ class PembayaranController extends Controller
         $pembayaran->nominal = $request->nominal;
         $pembayaran->jumlah_bayar = $request->jumlah_bayar;
         $pembayaran->save();
-        return redirect()->route('dataPembayaran.index')->with('message', 'Data berhasil ditambahkan!');
-    }
-
-    public function history()
-    {
-        $history = Pembayaran::all();
-        return view('dashboard.pembayaran.history', compact('history'));
-    }
-
-    public function generatePDF()
-    {
-        $history = Pembayaran::all();
-        return view('dashboard.pembayaran.pdf', compact('history'));
+        return redirect()->route('entryPembayaran.index')->with('message', 'Data berhasil ditambahkan!');
     }
 
     /**

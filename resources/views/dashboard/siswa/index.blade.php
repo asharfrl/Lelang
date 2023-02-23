@@ -32,10 +32,10 @@
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">NIS</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Nama</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">ID Kelas</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Kelas</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Alamat</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">No Telp</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">ID SPP</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Action</th>
                   </tr>
                 </thead>
@@ -55,7 +55,7 @@
                         {{ $row->nama }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->id_kelas }}
+                        {{ $row->kelas }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $row->alamat }}
@@ -64,7 +64,7 @@
                         {{ $row->no_telp }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->id_spp }}
+                        Rp {{ number_format($row->nominal) }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         <form action="{{ route('dataSiswa.destroy',$row->id) }}" method="POST">
