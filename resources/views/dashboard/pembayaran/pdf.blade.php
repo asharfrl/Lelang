@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Download Bukti Pembayaran</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table td, table th {
+        border: 1px solid black;
+        padding: 5px;
+      }
+
+    </style>
 </head>
 <body>
     <table class="table align-items-center mt-4 mb-0">

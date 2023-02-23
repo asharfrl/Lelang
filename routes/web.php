@@ -34,6 +34,13 @@ Route::middleware('login')->group(function () {
     });
     Route::get('dataHistory', [PembayaranController::class, 'history']);
 
+    // admin
+    Route::resource('dataKelas', KelasController::class)->middleware('admin');
+    Route::resource('dataPetugas', PetugasController::class)->middleware('admin');
+    Route::resource('dataSiswa', SiswaController::class)->middleware('admin');
+    Route::resource('dataPembayaran', PembayaranController::class)->middleware('admin');
+    Route::resource('dataSpp', SppController::class)->middleware('admin');
+
     Route::get('/generateLaporan', function () {
         $history = Pembayaran::all();
         $dompdf = new Dompdf();
@@ -42,14 +49,7 @@ Route::middleware('login')->group(function () {
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
         return $dompdf->stream('Laporan Pembayaran.pdf');
-    });
-
-    // admin
-    Route::resource('dataKelas', KelasController::class)->middleware('admin');
-    Route::resource('dataPetugas', PetugasController::class)->middleware('admin');
-    Route::resource('dataSiswa', SiswaController::class)->middleware('admin');
-    Route::resource('dataPembayaran', PembayaranController::class)->middleware('admin');
-    Route::resource('dataSpp', SppController::class)->middleware('admin');
+    })->middleware('admin');
 
     // petugas
     Route::resource('entryPembayaran', EntryPembayaranController::class)->middleware('petugas');
