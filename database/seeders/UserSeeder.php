@@ -20,19 +20,19 @@ class UserSeeder extends Seeder
             [
                 'username' => 'admin',
                 'password' => Hash::make('123'),
-                'nama_petugas' => 'Admin',
+                'nama_petugas' => 'Alice',
                 'level' => 'Admin',
             ],
             [
                 'username' => 'petugas',
                 'password' => Hash::make('123'),
-                'nama_petugas' => 'Petugas',
+                'nama_petugas' => 'Pharsa',
                 'level' => 'Petugas',
             ],
             [
                 'username' => 'siswa',
                 'password' => Hash::make('123'),
-                'nama_petugas' => 'Siswa',
+                'nama_petugas' => 'Silvanna',
                 'level' => 'Siswa',
             ]
         ];

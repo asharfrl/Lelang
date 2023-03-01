@@ -34,6 +34,8 @@
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tanggal Bayar</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Sisa Pembayaran</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -43,7 +45,7 @@
                         {{ $loop->iteration }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->nama_petugas }}
+                        {{ $row->id_petugas }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $row->nisn }}
@@ -52,10 +54,26 @@
                         {{ $row->tgl_bayar }} {{ $row->bulan_dibayar }} {{ $row->tahun_dibayar }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ number_format($row->nominal) }}
+                        {{ number_format($row->id_spp) }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         Rp {{ number_format($row->jumlah_bayar) }}
+                      </td>
+                      @if($row->sisa_bayar >= 0)
+                        <td class="text-xs text-success font-weight-bolder opacity-7">
+                          Rp {{ number_format($row->sisa_bayar) }}
+                        </td>
+                      @elseif($row->sisa_bayar < 0)
+                        <td class="text-xs text-danger font-weight-bolder opacity-7">
+                          Rp {{ number_format($row->sisa_bayar) }}
+                        </td>
+                      @endif
+                      <td class="text-xs font-weight-bolder opacity-7">
+                        <form action="{{ route('entryPembayaran.destroy',$row->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" onclick="return confirm('Apakah Anda yakin?')" class="btn btn-sm mb-0 me-1 btn-danger">Delete</button>
+                        </form>
                       </td>
                     </tr>
                   @endforeach

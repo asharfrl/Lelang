@@ -19,6 +19,7 @@
     </style>
 </head>
 <body>
+    <h3 align="center">Laporan Hasil Pembayaran</h3>
     <table class="table align-items-center mt-4 mb-0">
         <thead>
           <tr>
@@ -28,6 +29,7 @@
             <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tanggal Bayar</th>
             <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
             <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
+            <th class="text-uppercase text-xs font-weight-bolder opacity-9">Sisa Pembayaran</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +39,7 @@
                 {{ $loop->iteration }}
               </td>
               <td class="text-xs font-weight-bolder opacity-7">
-                {{ $row->nama_petugas }}
+                {{ $row->id_petugas }}
               </td>
               <td class="text-xs font-weight-bolder opacity-7">
                 {{ $row->nisn }}
@@ -46,10 +48,13 @@
                 {{ $row->tgl_bayar }} {{ $row->bulan_dibayar }} {{ $row->tahun_dibayar }}
               </td>
               <td class="text-xs font-weight-bolder opacity-7">
-                {{ number_format($row->nominal) }}
+                {{ number_format($row->id_spp) }}
               </td>
               <td class="text-xs font-weight-bolder opacity-7">
                 Rp {{ number_format($row->jumlah_bayar) }}
+              </td>
+              <td class="text-xs font-weight-bolder opacity-7">
+                Rp {{ number_format($row->sisa_bayar) }}
               </td>
             </tr>
           @endforeach

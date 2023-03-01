@@ -93,12 +93,12 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">SPP</label>
-                                        <select class="form-control" name="nominal" id="nominal" value="{{ old('nominal') }}" required>
+                                        <select class="form-control" name="id_spp" id="id_spp" value="{{ old('id_spp') }}" required>
                                             @foreach($id_spp as $spp)
                                                 <option value="{{$spp->nominal}}" @if($siswa->nominal == $spp->nominal)selected @endif>{{ number_format($spp->nominal) }}</option>
                                             @endforeach
                                         </select>
-                                        @error('nominal')
+                                        @error('id_spp')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

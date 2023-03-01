@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('kelas');
             $table->text('alamat');
             $table->string('no_telp');
-            $table->integer('nominal');
+            $table->integer('id_spp');
             $table->timestamps();
         });
     }

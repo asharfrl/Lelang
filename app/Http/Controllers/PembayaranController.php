@@ -45,14 +45,19 @@ class PembayaranController extends Controller
     public function store(Request $request)
     {
         $pembayaran = new Pembayaran;
-        $pembayaran->nama_petugas = $request->nama_petugas;
+        $pembayaran->id_petugas = $request->id_petugas;
         $pembayaran->nisn = $request->nisn;
         $pembayaran->tgl_bayar = $request->tgl_bayar;
         $pembayaran->bulan_dibayar = $request->bulan_dibayar;
         $pembayaran->tahun_dibayar = $request->tahun_dibayar;
-        $pembayaran->nominal = $request->nominal;
+        $pembayaran->id_spp = $request->id_spp;
         $pembayaran->jumlah_bayar = $request->jumlah_bayar;
+
+        $pembayaran->sisa_bayar = $pembayaran->jumlah_bayar - $pembayaran->id_spp;
+        $request->sisa_bayar = $pembayaran->sisa_bayar;
+
         $pembayaran->save();
+
         return redirect()->route('dataPembayaran.index')->with('message', 'Data berhasil ditambahkan!');
     }
 
@@ -60,12 +65,6 @@ class PembayaranController extends Controller
     {
         $history = Pembayaran::all();
         return view('dashboard.pembayaran.history', compact('history'));
-    }
-
-    public function generatePDF()
-    {
-        $history = Pembayaran::all();
-        return view('dashboard.pembayaran.pdf', compact('history'));
     }
 
     /**
@@ -110,6 +109,9 @@ class PembayaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pembayaran = Pembayaran::find($id);
+        $pembayaran->delete();
+
+        return redirect('/dataPembayaran')->with('message', 'Data berhasil dihapus!');
     }
 }

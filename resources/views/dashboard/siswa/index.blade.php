@@ -64,7 +64,7 @@
                         {{ $row->no_telp }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        Rp {{ number_format($row->nominal) }}
+                        Rp {{ number_format($row->id_spp) }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         <form action="{{ route('dataSiswa.destroy',$row->id) }}" method="POST">

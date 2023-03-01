@@ -8,8 +8,6 @@ use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Spp;
 use Illuminate\Http\Request;
-// use Maatwebsite\Excel\Facades\Excel;
-// use App\Exports\ExportLaporan;
 
 class EntryPembayaranController extends Controller
 {
@@ -46,14 +44,19 @@ class EntryPembayaranController extends Controller
     public function store(Request $request)
     {
         $pembayaran = new Pembayaran;
-        $pembayaran->nama_petugas = $request->nama_petugas;
+        $pembayaran->id_petugas = $request->id_petugas;
         $pembayaran->nisn = $request->nisn;
         $pembayaran->tgl_bayar = $request->tgl_bayar;
         $pembayaran->bulan_dibayar = $request->bulan_dibayar;
         $pembayaran->tahun_dibayar = $request->tahun_dibayar;
-        $pembayaran->nominal = $request->nominal;
+        $pembayaran->id_spp = $request->id_spp;
         $pembayaran->jumlah_bayar = $request->jumlah_bayar;
+
+        $pembayaran->sisa_bayar = $pembayaran->jumlah_bayar - $pembayaran->id_spp;
+        $request->sisa_bayar = $pembayaran->sisa_bayar;
+
         $pembayaran->save();
+
         return redirect()->route('entryPembayaran.index')->with('message', 'Data berhasil ditambahkan!');
     }
 
@@ -99,6 +102,9 @@ class EntryPembayaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pembayaran = Pembayaran::find($id);
+        $pembayaran->delete();
+
+        return redirect('/entryPembayaran')->with('message', 'Data berhasil dihapus!');
     }
 }

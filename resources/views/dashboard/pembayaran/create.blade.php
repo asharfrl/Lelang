@@ -22,12 +22,14 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Petugas</label>
-                                        <select class="form-control" name="nama_petugas" id="nama_petugas" value="{{ old('nama_petugas') }}" required autofocus>
+                                        <select class="form-control" name="id_petugas" id="id_petugas" value="{{ old('id_petugas') }}" required autofocus>
                                             @foreach($id_petugas as $petugas)
-                                                <option value="{{$petugas->nama_petugas}}">{{$petugas->nama_petugas}}</option>
+                                                @if($petugas->level == 'Admin' || $petugas->level == 'Petugas')
+                                                    <option value="{{$petugas->nama_petugas}}">{{$petugas->nama_petugas}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
-                                        @error('nama_petugas')
+                                        @error('id_petugas')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -39,7 +41,7 @@
                                         <label for="example-text-input" class="form-control-label">NISN</label>
                                         <select class="form-control" name="nisn" id="nisn" value="{{ old('nisn') }}" required>
                                             @foreach($nisn as $siswa)
-                                                <option value="{{$siswa->nisn}}" title="{{$siswa->nama}}">{{$siswa->nisn}}</option>
+                                                <option value="{{$siswa->nisn}} - {{$siswa->nama}}">{{$siswa->nisn}} - {{$siswa->nama}}</option>
                                             @endforeach
                                         </select>
                                         @error('nisn')
@@ -98,12 +100,12 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">SPP</label>
-                                        <select class="form-control" name="nominal" id="nominal" value="{{ old('nominal') }}" required>
+                                        <select class="form-control" name="id_spp" id="id_spp" value="{{ old('id_spp') }}" required>
                                             @foreach($id_spp as $spp)
                                                 <option value="{{$spp->nominal}}">{{ number_format($spp->nominal) }}</option>
                                             @endforeach
                                         </select>
-                                        @error('nominal')
+                                        @error('id_spp')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

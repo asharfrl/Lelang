@@ -6,7 +6,7 @@
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
     <div class="container-fluid py-1 px-3">
       <nav aria-label="breadcrumb">
-        <h6 class="font-weight-bolder text-white mt-4 mb-0">Data Pembayaran</h6>
+        <h6 class="font-weight-bolder text-white mt-4 mb-0">Data History Pembayaran</h6>
       </nav>
     </div>
   </nav>
@@ -36,6 +36,7 @@
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tanggal Bayar</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Sisa Pembayaran</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -45,7 +46,7 @@
                         {{ $loop->iteration }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->nama_petugas }}
+                        {{ $row->id_petugas }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $row->nisn }}
@@ -54,11 +55,20 @@
                         {{ $row->tgl_bayar }} {{ $row->bulan_dibayar }} {{ $row->tahun_dibayar }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ number_format($row->nominal) }}
+                        Rp {{ number_format($row->id_spp) }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         Rp {{ number_format($row->jumlah_bayar) }}
                       </td>
+                      @if($row->sisa_bayar >= 0)
+                        <td class="text-xs text-success font-weight-bolder opacity-7">
+                          Rp {{ number_format($row->sisa_bayar) }}
+                        </td>
+                      @elseif($row->sisa_bayar < 0)
+                        <td class="text-xs text-danger font-weight-bolder opacity-7">
+                          Rp {{ number_format($row->sisa_bayar) }}
+                        </td>
+                      @endif
                     </tr>
                   @endforeach
                 </tbody>
