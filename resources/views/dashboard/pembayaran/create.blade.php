@@ -41,7 +41,7 @@
                                         <label for="example-text-input" class="form-control-label">NISN</label>
                                         <select class="form-control" name="nisn" id="nisn" value="{{ old('nisn') }}" required>
                                             @foreach($nisn as $siswa)
-                                                <option value="{{$siswa->nisn}} - {{$siswa->nama}}">{{$siswa->nisn}} - {{$siswa->nama}}</option>
+                                                <option value="{{$siswa->nisn}}" title="{{$siswa->nama}}">{{$siswa->nisn}}</option>
                                             @endforeach
                                         </select>
                                         @error('nisn')

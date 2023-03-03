@@ -17,7 +17,7 @@ class Siswa
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->level == 'Petugas') {
+        if (Auth::check() && Auth::user()->level == 'Siswa') {
             return $next($request);
         }
 
