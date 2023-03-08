@@ -20,8 +20,15 @@
                 {{ session('message') }}
             </div>
           @endif
-          <div class="card-header pb-0 text-end">
-            <a href="/dataSpp/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
+          <div class="card-header pb-0 d-flex justify-content-between">
+            <div class="input-group" style="width: 25%;">
+              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="/dataSpp/search" method="GET">
+                <input type="search" name="search" class="form-control" placeholder="Cari Tahun ..." autofocus>
+              </form>
+            </div>
+            <div>
+              <a href="/dataSpp/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
+            </div>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">

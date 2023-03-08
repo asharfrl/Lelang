@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Spp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EntryPembayaranController extends Controller
 {
@@ -20,6 +21,16 @@ class EntryPembayaranController extends Controller
     {
         $pembayaran = Pembayaran::all();
         return view('dashboard.entryPembayaran.index', compact('pembayaran'));
+    }
+
+    public function search(Request $request)
+    {
+		$search = $request->search;
+        $pembayaran = DB::table('pembayaran')
+        ->where('nisn', 'like', "%" . $search . "%")
+        ->paginate();
+
+        return view('dashboard.entryPembayaran.index', ['pembayaran' => $pembayaran]);
     }
 
     /**

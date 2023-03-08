@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KelasController extends Controller
 {
@@ -16,6 +17,16 @@ class KelasController extends Controller
     {
         $kelas = Kelas::all();
         return view('dashboard.kelas.index', compact('kelas'));
+    }
+
+    public function search(Request $request)
+    {
+		$search = $request->search;
+        $kelas = DB::table('kelas')
+        ->where('nama_kelas', 'like', "%" . $search . "%")
+        ->paginate();
+
+        return view('dashboard.kelas.index', ['kelas' => $kelas]);
     }
 
     /**

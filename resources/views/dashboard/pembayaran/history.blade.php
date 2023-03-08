@@ -20,11 +20,19 @@
                 {{ session('message') }}
             </div>
           @endif
-          @if (auth()->user()->level == 'Admin')
-          <div class="card-header pb-0 text-end">
-            <a href="/generateLaporan" class="btn btn-sm mb-0 me-1 btn-info">Export</a>
+          <div class="card-header pb-0 d-flex justify-content-between">
+            <div class="input-group" style="width: 25%;">
+              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="/dataHistory/search" method="GET">
+                <input type="search" name="search" class="form-control" placeholder="Cari NISN ..." autofocus>
+              </form>
+            </div>
+            <div>
+              @if (auth()->user()->level == 'Admin')
+                <a href="/generateLaporan" class="btn btn-sm mb-0 me-1 btn-info">Export</a>
+              @endif
+            </div>
           </div>
-          @endif
+          
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
               <table class="table align-items-center mt-4 mb-0">

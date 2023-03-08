@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Spp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SppController extends Controller
 {
@@ -16,6 +17,16 @@ class SppController extends Controller
     {
         $spp = Spp::all();
         return view('dashboard.spp.index', compact('spp'));
+    }
+
+    public function search(Request $request)
+    {
+		$search = $request->search;
+        $spp = DB::table('spp')
+        ->where('tahun', 'like', "%" . $search . "%")
+        ->paginate();
+
+        return view('dashboard.spp.index', ['spp' => $spp]);
     }
 
     /**

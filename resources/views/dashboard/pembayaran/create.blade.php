@@ -23,11 +23,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Petugas</label>
                                         <select class="form-control" name="id_petugas" id="id_petugas" value="{{ old('id_petugas') }}" required autofocus>
-                                            @foreach($id_petugas as $petugas)
-                                                @if($petugas->level == 'Admin' || $petugas->level == 'Petugas')
-                                                    <option value="{{$petugas->nama_petugas}}">{{$petugas->nama_petugas}}</option>
-                                                @endif
-                                            @endforeach
+                                            <option value="{{ Auth()->user()->nama_petugas }}">{{ Auth()->user()->nama_petugas }}</option>
                                         </select>
                                         @error('id_petugas')
                                             <div class="invalid-feedback">
@@ -41,7 +37,7 @@
                                         <label for="example-text-input" class="form-control-label">NISN</label>
                                         <select class="form-control" name="nisn" id="nisn" value="{{ old('nisn') }}" required>
                                             @foreach($nisn as $siswa)
-                                                <option value="{{$siswa->nisn}}" title="{{$siswa->nama}}">{{$siswa->nisn}}</option>
+                                                <option value="{{$siswa->nisn}}">{{$siswa->nisn}} - {{$siswa->nama}}</option>
                                             @endforeach
                                         </select>
                                         @error('nisn')

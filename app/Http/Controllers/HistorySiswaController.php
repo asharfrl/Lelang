@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Siswa;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +15,8 @@ class HistorySiswaController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::all();
         $pembayaran = Pembayaran::where('nisn', Auth::user()->username)->get();
-        return view('dashboard.pembayaran.historySiswa', compact('siswa', 'pembayaran'));
+        return view('dashboard.pembayaran.historySiswa', compact('pembayaran'));
     }
 
     /**

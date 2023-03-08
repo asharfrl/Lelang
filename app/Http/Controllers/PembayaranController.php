@@ -9,6 +9,7 @@ use App\Models\Siswa;
 use App\Models\Spp;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
 {
@@ -21,6 +22,26 @@ class PembayaranController extends Controller
     {
         $pembayaran = Pembayaran::all();
         return view('dashboard.pembayaran.index', compact('pembayaran'));
+    }
+
+    public function search(Request $request)
+    {
+		$search = $request->search;
+        $pembayaran = DB::table('pembayaran')
+        ->where('nisn', 'like', "%" . $search . "%")
+        ->paginate();
+
+        return view('dashboard.pembayaran.index', ['pembayaran' => $pembayaran]);
+    }
+
+    public function search2(Request $request)
+    {
+		$search = $request->search;
+        $history = DB::table('pembayaran')
+        ->where('nisn', 'like', "%" . $search . "%")
+        ->paginate();
+
+        return view('dashboard.pembayaran.history', ['history' => $history]);
     }
 
     /**

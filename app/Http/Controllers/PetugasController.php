@@ -6,6 +6,7 @@ use App\Models\Petugas;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PetugasController extends Controller
 {
@@ -19,6 +20,16 @@ class PetugasController extends Controller
         $petugas = User::all();
         // $petugas = Petugas::all();
         return view('dashboard.petugas.index', compact('petugas'));
+    }
+
+    public function search(Request $request)
+    {
+		$search = $request->search;
+        $petugas = DB::table('users')
+        ->where('nama_petugas', 'like', "%" . $search . "%")
+        ->paginate();
+
+        return view('dashboard.petugas.index', ['petugas' => $petugas]);
     }
 
     /**

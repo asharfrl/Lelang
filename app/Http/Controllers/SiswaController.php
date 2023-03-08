@@ -6,6 +6,7 @@ use App\Models\Siswa;
 use App\Models\Kelas;
 use App\Models\Spp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
 {
@@ -18,6 +19,16 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::all();
         return view('dashboard.siswa.index', compact('siswa'));
+    }
+
+    public function search(Request $request)
+    {
+		$search = $request->search;
+        $siswa = DB::table('siswa')
+        ->where('nisn', 'like', "%" . $search . "%")
+        ->paginate();
+
+        return view('dashboard.siswa.index', ['siswa' => $siswa]);
     }
 
     /**
