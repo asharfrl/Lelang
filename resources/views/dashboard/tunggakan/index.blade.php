@@ -6,7 +6,7 @@
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
     <div class="container-fluid py-1 px-3">
       <nav aria-label="breadcrumb">
-        <h6 class="font-weight-bolder text-white mt-4 mb-0">Data Pembayaran</h6>
+        <h6 class="font-weight-bolder text-white mt-4 mb-0">Data Tunggakan</h6>
       </nav>
     </div>
   </nav>
@@ -22,12 +22,12 @@
           @endif
           <div class="card-header pb-0 d-flex justify-content-between">
             <div class="input-group" style="width: 25%;">
-              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="/dataPembayaran/search" method="GET">
+              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="/dataTunggakan/search" method="GET">
                 <input type="search" name="search" class="form-control" placeholder="Cari NISN ..." autofocus>
               </form>
             </div>
             <div>
-              <a href="/dataPembayaran/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
+              <a href="/dataTunggakan/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
             </div>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
@@ -38,16 +38,14 @@
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">No</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Petugas</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Waktu Bayar</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Bulan Dibayar</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Sisa Pembayaran</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Bulan Tunggakan</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Total Tunggakan</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($pembayaran as $row)
+                  @foreach($tunggakan as $row)
                     <tr>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $loop->iteration }}
@@ -59,28 +57,22 @@
                         {{ $row->nisn }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ substr($row->created_at, 0, 10) }}
-                      </td>
-                      <td class="text-xs font-weight-bolder opacity-7">
                         Rp {{ number_format($row->id_spp) }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->bulan_dibayar }} Bulan
+                        {{ $row->bulan_tunggakan }} Bulan
                       </td>
-                      <td class="text-xs font-weight-bolder opacity-7">
-                        Rp {{ number_format($row->jumlah_bayar) }}
-                      </td>
-                      @if($row->sisa_bayar >= 0)
+                      @if($row->total_tunggakan >= 0)
                         <td class="text-xs text-success font-weight-bolder opacity-7">
-                          Rp {{ number_format($row->sisa_bayar) }}
+                          Rp {{ number_format($row->total_tunggakan) }}
                         </td>
-                      @elseif($row->sisa_bayar < 0)
+                      @elseif($row->total_tunggakan < 0)
                         <td class="text-xs text-danger font-weight-bolder opacity-7">
-                          Rp {{ number_format($row->sisa_bayar) }}
+                          Rp {{ number_format($row->total_tunggakan) }}
                         </td>
                       @endif
                       <td class="text-xs font-weight-bolder opacity-7">
-                        <form action="{{ route('dataPembayaran.destroy',$row->id) }}" method="POST">
+                        <form action="{{ route('dataTunggakan.destroy',$row->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <button type="submit" onclick="return confirm('Apakah Anda yakin?')" class="btn btn-sm mb-0 me-1 btn-danger">Delete</button>

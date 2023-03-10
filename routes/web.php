@@ -5,6 +5,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\TunggakanController;
 use App\Http\Controllers\EntryPembayaranController;
 use App\Http\Controllers\HistorySiswaController;
 use App\Http\Controllers\SppController;
@@ -27,6 +28,10 @@ Route::get('/', [LoginController::class, 'index']);
 Route::post('/', [LoginController::class, 'authanticate']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
+Route::get('/test', function () {
+    return view('dashboard.tunggakan.index');
+});
+
 Route::middleware('login')->group(function () {
 
     // all access
@@ -41,6 +46,7 @@ Route::middleware('login')->group(function () {
     Route::resource('dataSiswa', SiswaController::class)->middleware('admin');
     Route::resource('dataPembayaran', PembayaranController::class)->middleware('admin');
     Route::resource('dataSpp', SppController::class)->middleware('admin');
+    Route::resource('dataTunggakan', TunggakanController::class)->middleware('admin');
 
     Route::get('/generateLaporan', function () {
         $history = Pembayaran::all();
@@ -53,6 +59,7 @@ Route::middleware('login')->group(function () {
     })->middleware('admin');
 
     Route::get('/dataKelas/search', [KelasController::class, 'search'])->middleware('admin');
+    Route::get('/dataTunggakan/search', [TunggakanController::class, 'search'])->middleware('admin');
     Route::get('/dataPembayaran/search', [PembayaranController::class, 'search'])->middleware('admin');
     Route::get('/dataHistory/search', [PembayaranController::class, 'search2'])->middleware('admin');
     Route::get('/dataPetugas/search', [PetugasController::class, 'search'])->middleware('admin');

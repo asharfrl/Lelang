@@ -27,7 +27,7 @@
               </form>
             </div>
             <div>
-              <a href="/dataPembayaran/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
+              <a href="/entryPembayaran/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
             </div>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
@@ -39,6 +39,7 @@
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Petugas</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tanggal Bayar</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Sisa Pembayaran</th>

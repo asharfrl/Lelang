@@ -68,13 +68,21 @@ class PembayaranController extends Controller
         $pembayaran = new Pembayaran;
         $pembayaran->id_petugas = $request->id_petugas;
         $pembayaran->nisn = $request->nisn;
-        $pembayaran->tgl_bayar = $request->tgl_bayar;
-        $pembayaran->bulan_dibayar = $request->bulan_dibayar;
-        $pembayaran->tahun_dibayar = $request->tahun_dibayar;
-        $pembayaran->id_spp = $request->id_spp;
-        $pembayaran->jumlah_bayar = $request->jumlah_bayar;
 
-        $pembayaran->sisa_bayar = $pembayaran->jumlah_bayar - $pembayaran->id_spp;
+        $pembayaran->tgl_bayar = null;
+        $request->tgl_bayar = $pembayaran->tgl_bayar;
+
+        $pembayaran->bulan_dibayar = $request->bulan_dibayar;
+
+        $pembayaran->tahun_dibayar = null;
+        $request->tahun_dibayar = $pembayaran->tahun_dibayar;
+
+        $pembayaran->id_spp = $request->id_spp;
+
+        $pembayaran->jumlah_bayar = $pembayaran->bulan_dibayar * $pembayaran->id_spp;
+        $request->jumlah_bayar = $pembayaran->jumlah_bayar;
+
+        $pembayaran->sisa_bayar = '0';
         $request->sisa_bayar = $pembayaran->sisa_bayar;
 
         $pembayaran->save();
