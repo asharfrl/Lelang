@@ -22,16 +22,6 @@ class PetugasController extends Controller
         return view('dashboard.petugas.index', compact('petugas'));
     }
 
-    public function search(Request $request)
-    {
-		$search = $request->search;
-        $petugas = DB::table('users')
-        ->where('nama_petugas', 'like', "%" . $search . "%")
-        ->paginate();
-
-        return view('dashboard.petugas.index', ['petugas' => $petugas]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *

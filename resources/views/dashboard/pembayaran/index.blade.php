@@ -20,12 +20,7 @@
                 {{ session('message') }}
             </div>
           @endif
-          <div class="card-header pb-0 d-flex justify-content-between">
-            <div class="input-group" style="width: 25%;">
-              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="/dataPembayaran/search" method="GET">
-                <input type="search" name="search" class="form-control" placeholder="Cari NISN ..." autofocus>
-              </form>
-            </div>
+          <div class="card-header pb-0 d-flex justify-content-end">
             <div>
               <a href="/dataPembayaran/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
             </div>
@@ -55,7 +50,7 @@
                         {{ $row->id_petugas }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->id_tunggakan }}
+                        {{ $row->nama }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ substr($row->created_at, 0, 10) }}

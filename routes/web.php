@@ -7,6 +7,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\TunggakanController;
 use App\Http\Controllers\EntryPembayaranController;
+use App\Http\Controllers\EntryTunggakanController;
 use App\Http\Controllers\HistorySiswaController;
 use App\Http\Controllers\SppController;
 use App\Http\Controllers\LoginController;
@@ -58,21 +59,10 @@ Route::middleware('login')->group(function () {
         return $dompdf->stream('Laporan Pembayaran.pdf');
     })->middleware('admin');
 
-    Route::get('/dataKelas/search', [KelasController::class, 'search'])->middleware('admin');
-    Route::get('/dataTunggakan/search', [TunggakanController::class, 'search'])->middleware('admin');
-    Route::get('/dataPembayaran/search', [PembayaranController::class, 'search'])->middleware('admin');
-    Route::get('/dataHistory/search', [PembayaranController::class, 'search2'])->middleware('admin');
-    Route::get('/dataPetugas/search', [PetugasController::class, 'search'])->middleware('admin');
-    Route::get('/dataSiswa/search', [SiswaController::class, 'search'])->middleware('admin');
-    Route::get('/dataSpp/search', [SppController::class, 'search'])->middleware('admin');
-
     // petugas
     Route::resource('entryPembayaran', EntryPembayaranController::class)->middleware('petugas');
+    Route::resource('entryTunggakan', EntryTunggakanController::class)->middleware('petugas');
 
-    Route::get('/entryPembayaran/search', [EntryPembayaranController::class, 'search'])->middleware('petugas');
-    Route::get('/dataHistory/search', [PembayaranController::class, 'search2'])->middleware('petugas');
-    
     // siswa
     Route::resource('historyPembayaran', HistorySiswaController::class)->middleware('siswa');
-    Route::get('/historyPembayaran/search', [HistorySiswaController::class, 'search'])->middleware('siswa');
 });

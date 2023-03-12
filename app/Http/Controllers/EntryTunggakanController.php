@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pembayaran;
+use App\Models\Tunggakan;
+use App\Models\Petugas;
+use App\Models\Siswa;
+use App\Models\Spp;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class HistorySiswaController extends Controller
+class EntryTunggakanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,8 @@ class HistorySiswaController extends Controller
      */
     public function index()
     {
-        $pembayaran = Pembayaran::where('nama', Auth::user()->username)->get();
-        return view('dashboard.pembayaran.historySiswa', compact('pembayaran'));
+        $tunggakan = Tunggakan::all();
+        return view('dashboard.tunggakan.index', compact('tunggakan'));
     }
 
     /**
@@ -26,7 +28,10 @@ class HistorySiswaController extends Controller
      */
     public function create()
     {
-        //
+        $id_petugas = Petugas::all();
+        $nisn = Siswa::all();
+        $id_spp = Spp::all();
+        return view('dashboard.tunggakan.create', compact('id_petugas', 'nisn', 'id_spp'));
     }
 
     /**
@@ -37,7 +42,22 @@ class HistorySiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tunggakan = new Tunggakan;
+        $tunggakan->id_petugas = $request->id_petugas;
+        $tunggakan->nisn = $request->nisn;
+        $tunggakan->nama = $request->nama;
+        $tunggakan->id_spp = $request->id_spp;
+        $tunggakan->bulan_tunggakan = $request->bulan_tunggakan;
+
+        $tunggakan->total_tunggakan = $tunggakan->id_spp * $tunggakan->bulan_tunggakan;
+        $request->total_tunggakan = $tunggakan->total_tunggakan;
+
+        $tunggakan->sisa_bulan = $request->bulan_tunggakan;
+        $tunggakan->sisa_tunggakan = $request->total_tunggakan;
+
+        $tunggakan->save();
+
+        return redirect()->route('dataTunggakan.index')->with('message', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -82,6 +102,8 @@ class HistorySiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tunggakan = Tunggakan::find($id);
+        $tunggakan->delete();
+        return redirect()->route('dataTunggakan.index')->with('message', 'Data berhasil dihapus!');
     }
 }

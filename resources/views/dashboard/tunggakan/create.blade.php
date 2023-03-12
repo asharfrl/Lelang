@@ -35,7 +35,22 @@
                                         <label for="example-text-input" class="form-control-label">NISN</label>
                                         <select class="form-control" name="nisn" id="nisn" value="{{ old('nisn') }}" required autofocus>
                                             @foreach($nisn as $siswa)
-                                                <option value="{{$siswa->nisn}}">{{$siswa->nisn}} - {{$siswa->nama}}</option>
+                                                <option value="{{$siswa->nisn}}">{{$siswa->nisn}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('nisn')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Nama</label>
+                                        <select class="form-control" name="nama" id="nama" value="{{ old('nisn') }}" required>
+                                            @foreach($nisn as $siswa)
+                                                <option value="{{$siswa->nama}}">{{$siswa->nama}}</option>
                                             @endforeach
                                         </select>
                                         @error('nisn')

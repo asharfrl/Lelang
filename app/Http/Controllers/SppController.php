@@ -19,16 +19,6 @@ class SppController extends Controller
         return view('dashboard.spp.index', compact('spp'));
     }
 
-    public function search(Request $request)
-    {
-		$search = $request->search;
-        $spp = DB::table('spp')
-        ->where('tahun', 'like', "%" . $search . "%")
-        ->paginate();
-
-        return view('dashboard.spp.index', ['spp' => $spp]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *

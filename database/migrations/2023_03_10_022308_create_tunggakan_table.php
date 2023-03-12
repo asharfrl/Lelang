@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_petugas');
             $table->string('nisn');
-            // $table->string('nama');
+            $table->string('nama');
             $table->integer('id_spp');
             $table->string('bulan_tunggakan');
             $table->string('total_tunggakan');

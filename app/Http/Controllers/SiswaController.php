@@ -21,16 +21,6 @@ class SiswaController extends Controller
         return view('dashboard.siswa.index', compact('siswa'));
     }
 
-    public function search(Request $request)
-    {
-		$search = $request->search;
-        $siswa = DB::table('siswa')
-        ->where('nisn', 'like', "%" . $search . "%")
-        ->paginate();
-
-        return view('dashboard.siswa.index', ['siswa' => $siswa]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *

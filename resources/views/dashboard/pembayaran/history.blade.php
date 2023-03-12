@@ -20,12 +20,7 @@
                 {{ session('message') }}
             </div>
           @endif
-          <div class="card-header pb-0 d-flex justify-content-between">
-            <div class="input-group" style="width: 25%;">
-              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="/dataHistory/search" method="GET">
-                <input type="search" name="search" class="form-control" placeholder="Cari NISN ..." autofocus>
-              </form>
-            </div>
+          <div class="card-header pb-0 d-flex justify-content-end">
             <div>
               @if (auth()->user()->level == 'Admin')
                 <a href="/generateLaporan" class="btn btn-sm mb-0 me-1 btn-info">Export</a>
@@ -41,10 +36,10 @@
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">No</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Petugas</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tanggal Bayar</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Waktu Bayar</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Bulan Dibayar</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Sisa Pembayaran</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -57,26 +52,20 @@
                         {{ $row->id_petugas }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->nisn }}
+                        {{ $row->nama }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->tgl_bayar }} {{ $row->bulan_dibayar }} {{ $row->tahun_dibayar }}
+                        {{ substr($row->created_at, 0, 10) }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         Rp {{ number_format($row->id_spp) }}
                       </td>
-                      <td class="text-xs font-weight-bolder opacity-7">
+                      <td class="text-xs text-success font-weight-bolder opacity-7">
+                        {{ $row->bulan_dibayar }} Bulan
+                      </td>
+                      <td class="text-xs text-success font-weight-bolder opacity-7">
                         Rp {{ number_format($row->jumlah_bayar) }}
                       </td>
-                      @if($row->sisa_bayar >= 0)
-                        <td class="text-xs text-success font-weight-bolder opacity-7">
-                          Rp {{ number_format($row->sisa_bayar) }}
-                        </td>
-                      @elseif($row->sisa_bayar < 0)
-                        <td class="text-xs text-danger font-weight-bolder opacity-7">
-                          Rp {{ number_format($row->sisa_bayar) }}
-                        </td>
-                      @endif
                     </tr>
                   @endforeach
                 </tbody>

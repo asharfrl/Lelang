@@ -30,9 +30,9 @@ class UserSeeder extends Seeder
                 'level' => 'Petugas',
             ],
             [
-                'username' => 'siswa',
+                'username' => '1234567890',
                 'password' => Hash::make('123'),
-                'nama_petugas' => 'Silvanna',
+                'nama_petugas' => 'Melawati',
                 'level' => 'Siswa',
             ]
         ];

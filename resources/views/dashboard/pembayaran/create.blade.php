@@ -45,7 +45,21 @@
                                         @enderror
                                     </div>
                                 </div>
-                                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Nama</label>
+                                        <select class="form-control" name="nama" id="nama" value="{{ old('nama') }}" required autofocus>
+                                            @foreach($nisn as $siswa)
+                                                <option value="{{$siswa->nisn}}">{{$siswa->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('nama')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">SPP</label>

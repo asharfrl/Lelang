@@ -19,46 +19,46 @@
     </style>
 </head>
 <body>
-    <h3 align="center">Laporan Hasil Pembayaran</h3>
+    <h3 align="center">Laporan Hasil Pembayaran SPP</h3>
     <table class="table align-items-center mt-4 mb-0">
-        <thead>
+      <thead>
+        <tr>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-9">No</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-9">Petugas</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-9">Waktu Bayar</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-9">Bulan Dibayar</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($history as $row)
           <tr>
-            <th class="text-uppercase text-xs font-weight-bolder opacity-9">No</th>
-            <th class="text-uppercase text-xs font-weight-bolder opacity-9">Petugas</th>
-            <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
-            <th class="text-uppercase text-xs font-weight-bolder opacity-9">Tanggal Bayar</th>
-            <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
-            <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
-            <th class="text-uppercase text-xs font-weight-bolder opacity-9">Sisa Pembayaran</th>
+            <td class="text-xs font-weight-bolder opacity-7">
+              {{ $loop->iteration }}
+            </td>
+            <td class="text-xs font-weight-bolder opacity-7">
+              {{ $row->id_petugas }}
+            </td>
+            <td class="text-xs font-weight-bolder opacity-7">
+              {{ $row->nama }}
+            </td>
+            <td class="text-xs font-weight-bolder opacity-7">
+              {{ substr($row->created_at, 0, 10) }}
+            </td>
+            <td class="text-xs font-weight-bolder opacity-7">
+              Rp {{ number_format($row->id_spp) }}
+            </td>
+            <td class="text-xs text-success font-weight-bolder opacity-7">
+              {{ $row->bulan_dibayar }} Bulan
+            </td>
+            <td class="text-xs text-success font-weight-bolder opacity-7">
+              Rp {{ number_format($row->jumlah_bayar) }}
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          @foreach($history as $row)
-            <tr>
-              <td class="text-xs font-weight-bolder opacity-7">
-                {{ $loop->iteration }}
-              </td>
-              <td class="text-xs font-weight-bolder opacity-7">
-                {{ $row->id_petugas }}
-              </td>
-              <td class="text-xs font-weight-bolder opacity-7">
-                {{ $row->nisn }}
-              </td>
-              <td class="text-xs font-weight-bolder opacity-7">
-                {{ $row->tgl_bayar }} {{ $row->bulan_dibayar }} {{ $row->tahun_dibayar }}
-              </td>
-              <td class="text-xs font-weight-bolder opacity-7">
-                {{ number_format($row->id_spp) }}
-              </td>
-              <td class="text-xs font-weight-bolder opacity-7">
-                Rp {{ number_format($row->jumlah_bayar) }}
-              </td>
-              <td class="text-xs font-weight-bolder opacity-7">
-                Rp {{ number_format($row->sisa_bayar) }}
-              </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
+        @endforeach
+      </tbody>
+    </table>
 </body>
 </html>

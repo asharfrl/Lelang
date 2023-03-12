@@ -19,16 +19,6 @@ class KelasController extends Controller
         return view('dashboard.kelas.index', compact('kelas'));
     }
 
-    public function search(Request $request)
-    {
-		$search = $request->search;
-        $kelas = DB::table('kelas')
-        ->where('nama_kelas', 'like', "%" . $search . "%")
-        ->paginate();
-
-        return view('dashboard.kelas.index', ['kelas' => $kelas]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *

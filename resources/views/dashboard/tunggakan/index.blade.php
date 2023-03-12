@@ -20,12 +20,7 @@
                 {{ session('message') }}
             </div>
           @endif
-          <div class="card-header pb-0 d-flex justify-content-between">
-            <div class="input-group" style="width: 25%;">
-              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="/dataTunggakan/search" method="GET">
-                <input type="search" name="search" class="form-control" placeholder="Cari NISN ..." autofocus>
-              </form>
-            </div>
+          <div class="card-header pb-0 d-flex justify-content-end">
             <div>
               <a href="/dataTunggakan/create" class="btn btn-sm mb-0 me-1 btn-success">Create</a>
             </div>
@@ -38,6 +33,7 @@
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">No</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Petugas</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">NISN</th>
+                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Nama</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Bulan Tunggakan</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Total Tunggakan</th>
@@ -55,6 +51,9 @@
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ $row->nisn }}
+                      </td>
+                      <td class="text-xs font-weight-bolder opacity-7">
+                        {{ $row->nama }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         Rp {{ number_format($row->id_spp) }}

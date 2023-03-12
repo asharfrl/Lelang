@@ -45,6 +45,7 @@ class TunggakanController extends Controller
         $tunggakan = new Tunggakan;
         $tunggakan->id_petugas = $request->id_petugas;
         $tunggakan->nisn = $request->nisn;
+        $tunggakan->nama = $request->nama;
         $tunggakan->id_spp = $request->id_spp;
         $tunggakan->bulan_tunggakan = $request->bulan_tunggakan;
 

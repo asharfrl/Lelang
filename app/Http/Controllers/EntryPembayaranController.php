@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
-use App\Models\Petugas;
+use App\Models\Tunggakan;
 use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Spp;
@@ -23,16 +23,6 @@ class EntryPembayaranController extends Controller
         return view('dashboard.entryPembayaran.index', compact('pembayaran'));
     }
 
-    public function search(Request $request)
-    {
-		$search = $request->search;
-        $pembayaran = DB::table('pembayaran')
-        ->where('nisn', 'like', "%" . $search . "%")
-        ->paginate();
-
-        return view('dashboard.entryPembayaran.index', ['pembayaran' => $pembayaran]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -40,10 +30,11 @@ class EntryPembayaranController extends Controller
      */
     public function create()
     {
-        $nisn   = Siswa::all();
+        $nisn = Siswa::all();
         $id_petugas = User::all();
+        $id_tunggakan = Tunggakan::all();
         $id_spp = Spp::all();
-        return view('dashboard.entryPembayaran.create')->with('nisn', $nisn)->with('id_petugas', $id_petugas)->with('id_spp', $id_spp);
+        return view('dashboard.entryPembayaran.create', compact('id_tunggakan', 'nisn', 'id_petugas', 'id_spp'));
     }
 
     /**
@@ -54,21 +45,37 @@ class EntryPembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        $pembayaran = new Pembayaran;
-        $pembayaran->id_petugas = $request->id_petugas;
-        $pembayaran->nisn = $request->nisn;
-        $pembayaran->tgl_bayar = $request->tgl_bayar;
-        $pembayaran->bulan_dibayar = $request->bulan_dibayar;
-        $pembayaran->tahun_dibayar = $request->tahun_dibayar;
-        $pembayaran->id_spp = $request->id_spp;
-        $pembayaran->jumlah_bayar = $request->jumlah_bayar;
+        $rules = [
+            'id_petugas' => ['required', 'string'],
+            'id_spp' => ['required'],
+            'nama' => ['required'],
+            'tunggakan' => ['required'],
+            'bulan_dibayar' => ['required', 'numeric'],
+            'jumlah_bayar' => ['required']
+        ];
 
-        $pembayaran->sisa_bayar = $pembayaran->jumlah_bayar - $pembayaran->id_spp;
-        $request->sisa_bayar = $pembayaran->sisa_bayar;
+        if ($request->tunggakan) {
+            $tunggakan = Tunggakan::find($request->tunggakan);
+            array_push($rules['bulan_dibayar'], 'max:' . $tunggakan->sisa_bulan);
+            array_push($rules['jumlah_bayar'], 'max:' . $tunggakan->sisa_tunggakan);
+        }
 
-        $pembayaran->save();
+        $validatedData = $request->validate($rules);
 
-        return redirect()->route('entryPembayaran.index')->with('message', 'Data berhasil ditambahkan!');
+        if ($request->tunggakan) {
+            $tunggakan = Tunggakan::find($request->tunggakan);
+            $tunggakan->sisa_bulan -= $request->bulan_dibayar;
+            $tunggakan->sisa_tunggakan -= $request->jumlah_bayar;
+            $tunggakan->save();
+
+            $validatedData['sisa_bayar'] = $tunggakan->sisa_tunggakan - $request->jumlah_bayar;
+            $validatedData['nisn'] = $request->tunggakan;
+            unset($validatedData['tunggakan']);
+
+            Pembayaran::create($validatedData);
+
+            return to_route('entryPembayaran.index')->with('message', 'Data berhasil ditambahkan!');
+        }
     }
 
     /**
