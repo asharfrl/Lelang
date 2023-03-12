@@ -51,6 +51,9 @@ class TunggakanController extends Controller
         $tunggakan->total_tunggakan = $tunggakan->id_spp * $tunggakan->bulan_tunggakan;
         $request->total_tunggakan = $tunggakan->total_tunggakan;
 
+        $tunggakan->sisa_bulan = $request->bulan_tunggakan;
+        $tunggakan->sisa_tunggakan = $request->total_tunggakan;
+
         $tunggakan->save();
 
         return redirect()->route('dataTunggakan.index')->with('message', 'Data berhasil ditambahkan!');

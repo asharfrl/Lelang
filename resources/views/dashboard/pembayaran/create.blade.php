@@ -33,12 +33,28 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">NISN</label>
-                                        <select class="form-control" name="nisn" id="nisn" value="{{ old('nisn') }}" required autofocus>
-                                            @foreach($nisn as $siswa)
-                                                <option value="{{$siswa->nisn}}">{{$siswa->nisn}} - {{$siswa->nama}}</option>
+                                        <select class="form-control" name="tunggakan" id="tunggakan" value="{{ old('tunggakan') }}" required autofocus>
+                                            @foreach($id_tunggakan as $siswa)
+                                                <option value="{{$siswa->id}}">{{$siswa->nisn}}</option>
                                             @endforeach
                                         </select>
                                         @error('nisn')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">SPP</label>
+                                        <select class="form-control" name="id_spp" id="id_spp" value="{{ old('id_spp') }}" required>
+                                            @foreach($id_spp as $spp)
+                                                <option value="{{$spp->nominal}}">{{ number_format($spp->nominal) }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('id_spp')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -58,13 +74,9 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">SPP</label>
-                                        <select class="form-control" name="id_spp" id="id_spp" value="{{ old('id_spp') }}" required>
-                                            @foreach($id_spp as $spp)
-                                                <option value="{{$spp->nominal}}">{{ number_format($spp->nominal) }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('id_spp')
+                                        <label for="example-text-input" class="form-control-label">Jumlah bayar</label>
+                                        <input class="form-control" name="jumlah_bayar" id="jumlah_bayar" type="number" placeholder="Masukkan jumlah bulan dibayar ..." value="{{ old('jumlah_bayar') }}" required>
+                                        @error('jumlah_bayar')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

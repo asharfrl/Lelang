@@ -9,5 +9,5 @@ class Tunggakan extends Model
 {
     use HasFactory;
     protected $table = 'tunggakan';
-    protected $fillable = ['id_petugas', 'nisn', 'id_spp', 'bulan_tunggakan', 'total_tunggakan'];
+    protected $guarded = ['id'];
 }

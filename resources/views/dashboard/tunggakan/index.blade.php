@@ -59,16 +59,22 @@
                       <td class="text-xs font-weight-bolder opacity-7">
                         Rp {{ number_format($row->id_spp) }}
                       </td>
-                      <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->bulan_tunggakan }} Bulan
-                      </td>
-                      @if($row->total_tunggakan >= 0)
+                      @if($row->sisa_tunggakan <= 0)
                         <td class="text-xs text-success font-weight-bolder opacity-7">
-                          Rp {{ number_format($row->total_tunggakan) }}
+                          {{ $row->sisa_bulan }} Bulan
                         </td>
-                      @elseif($row->total_tunggakan < 0)
+                      @elseif($row->sisa_tunggakan > 0)
                         <td class="text-xs text-danger font-weight-bolder opacity-7">
-                          Rp {{ number_format($row->total_tunggakan) }}
+                          {{ $row->sisa_bulan }} Bulan
+                        </td>
+                      @endif
+                      @if($row->sisa_tunggakan <= 0)
+                        <td class="text-xs text-success font-weight-bolder opacity-7">
+                          Rp {{ number_format($row->sisa_tunggakan) }}
+                        </td>
+                      @elseif($row->sisa_tunggakan > 0)
+                        <td class="text-xs text-danger font-weight-bolder opacity-7">
+                          Rp {{ number_format($row->sisa_tunggakan) }}
                         </td>
                       @endif
                       <td class="text-xs font-weight-bolder opacity-7">

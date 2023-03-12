@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->string('id_petugas');
-            $table->string('nisn');
+            $table->string('id_tunggakan');
+            // $table->string('nisn');
+            // $table->string('nama');
             $table->integer('tgl_bayar')->nullable();
             $table->string('bulan_dibayar');
             $table->string('tahun_dibayar')->nullable();

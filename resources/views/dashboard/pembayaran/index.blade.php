@@ -42,7 +42,6 @@
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">SPP</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Bulan Dibayar</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Jumlah Bayar</th>
-                    <th class="text-uppercase text-xs font-weight-bolder opacity-9">Sisa Pembayaran</th>
                     <th class="text-uppercase text-xs font-weight-bolder opacity-9">Action</th>
                   </tr>
                 </thead>
@@ -56,7 +55,7 @@
                         {{ $row->id_petugas }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
-                        {{ $row->nisn }}
+                        {{ $row->id_tunggakan }}
                       </td>
                       <td class="text-xs font-weight-bolder opacity-7">
                         {{ substr($row->created_at, 0, 10) }}
@@ -64,21 +63,12 @@
                       <td class="text-xs font-weight-bolder opacity-7">
                         Rp {{ number_format($row->id_spp) }}
                       </td>
-                      <td class="text-xs font-weight-bolder opacity-7">
+                      <td class="text-xs text-success font-weight-bolder opacity-7">
                         {{ $row->bulan_dibayar }} Bulan
                       </td>
-                      <td class="text-xs font-weight-bolder opacity-7">
+                      <td class="text-xs text-success font-weight-bolder opacity-7">
                         Rp {{ number_format($row->jumlah_bayar) }}
                       </td>
-                      @if($row->sisa_bayar >= 0)
-                        <td class="text-xs text-success font-weight-bolder opacity-7">
-                          Rp {{ number_format($row->sisa_bayar) }}
-                        </td>
-                      @elseif($row->sisa_bayar < 0)
-                        <td class="text-xs text-danger font-weight-bolder opacity-7">
-                          Rp {{ number_format($row->sisa_bayar) }}
-                        </td>
-                      @endif
                       <td class="text-xs font-weight-bolder opacity-7">
                         <form action="{{ route('dataPembayaran.destroy',$row->id) }}" method="POST">
                           @csrf
