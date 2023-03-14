@@ -63,9 +63,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">SPP</label>
-                                        <select class="form-control" name="id_spp" id="id_spp" value="{{ old('id_spp') }}" required>
+                                        <select class="form-control" name="id_spp" id="bil1" value="{{ old('id_spp') }}" required>
                                             @foreach($id_spp as $spp)
-                                                <option value="{{$spp->nominal}}">{{ number_format($spp->nominal) }}</option>
+                                            <option value="{{$spp->nominal}}" data-nominal="{{ $spp->nominal }}">{{ number_format($spp->nominal) }}</option>
                                             @endforeach
                                         </select>
                                         @error('id_spp')
@@ -78,8 +78,19 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Bulan Tunggakan</label>
-                                        <input class="form-control" name="bulan_tunggakan" id="bulan_tunggakan" type="number" placeholder="Masukkan jumlah bulan tunggakan ..." value="{{ old('bulan_tunggakan') }}" required>
+                                        <input class="form-control" name="bulan_tunggakan" id="bil2" type="number" placeholder="Masukkan jumlah bulan tunggakan ..." value="{{ old('bulan_tunggakan') }}" required>
                                         @error('bulan_tunggakan')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Total Tunggakan</label>
+                                        <input class="form-control" name="total_tunggakan" id="hasil" type="number" value="{{ old('total_tunggakan') }}" readonly>
+                                        @error('total_tunggakan')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -98,4 +109,12 @@
         </div>
     </div>
 </main>
+<script>
+    document.querySelector('#bil2').addEventListener('input', () => {
+        const bil1 = parseInt(document.querySelector('#bil1')[document.querySelector('#bil1').selectedIndex].dataset.nominal)
+        const bil2 = parseInt(document.querySelector('#bil2').value)
+        const hasil = bil1 * bil2
+        document.querySelector('#hasil').value = hasil
+    })
+</script>
 @endsection
