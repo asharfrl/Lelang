@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Petugas;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -20,6 +19,9 @@ class PetugasController extends Controller
         $petugas = User::all();
         // $petugas = Petugas::all();
         return view('dashboard.petugas.index', compact('petugas'));
+
+        // $petugasData = User::where('level', 'Masyarakat')->get();
+        // return view('dashboard.petugas.index', compact('petugasData'));
     }
 
     /**
@@ -55,7 +57,7 @@ class PetugasController extends Controller
      * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
-    public function show(Petugas $petugas)
+    public function show($petugas)
     {
         //
     }
@@ -82,7 +84,7 @@ class PetugasController extends Controller
     {
         $petugas = User::find($id);
         $petugas->username = $request->username;
-        $petugas->password = $request->password;
+        $petugas->password = Hash::make($request->password);
         $petugas->nama_petugas = $request->nama_petugas;
         $petugas->level = $request->level;
         $petugas->save();
@@ -101,6 +103,6 @@ class PetugasController extends Controller
         $petugas = User::find($id);
         $petugas->delete();
 
-        return redirect('/dataPetugas')->with('message', 'Data berhasil dihapus!');
+        return redirect('/dataPetugas')->with('delete', 'Data berhasil dihapus!');
     }
 }

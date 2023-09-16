@@ -1,18 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KelasController;
-use App\Http\Controllers\PetugasController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\TunggakanController;
-use App\Http\Controllers\EntryPembayaranController;
-use App\Http\Controllers\EntryTunggakanController;
-use App\Http\Controllers\HistorySiswaController;
-use App\Http\Controllers\SppController;
 use App\Http\Controllers\LoginController;
-use Dompdf\Dompdf;
-use App\Models\Pembayaran;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\LelangController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,44 +19,36 @@ use App\Models\Pembayaran;
 |
 */
 
-Route::get('/', [LoginController::class, 'index']);
-Route::post('/', [LoginController::class, 'authanticate']);
+// Validasi
+Route::get('/', [LoginController::class, 'index'])->name('welcome');
+Route::post('/logins', [LoginController::class, 'authanticate']);
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::post('/register', [LoginController::class, 'store']);
 
-Route::get('/test', function () {
-    return view('dashboard.tunggakan.index');
-});
 
+
+// Pembatas Akses
 Route::middleware('login')->group(function () {
 
-    // all access
+    // Admin & Petugas
     Route::get('/dashboard', function () {
         return view('dashboard.dashboard');
-    });
-    Route::get('dataHistory', [PembayaranController::class, 'history']);
+    })->middleware('checkRole:Admin,Petugas');
+    Route::resource('dataBarang', BarangController::class)->middleware('checkRole:Admin,Petugas');
+    Route::resource('laporan', LaporanController::class)->middleware('checkRole:Admin,Petugas');
+    Route::get('/laporan', [LaporanController::class, 'index'])->middleware('checkRole:Admin,Petugas');
 
-    // admin
-    Route::resource('dataKelas', KelasController::class)->middleware('admin');
-    Route::resource('dataPetugas', PetugasController::class)->middleware('admin');
-    Route::resource('dataSiswa', SiswaController::class)->middleware('admin');
-    Route::resource('dataPembayaran', PembayaranController::class)->middleware('admin');
-    Route::resource('dataSpp', SppController::class)->middleware('admin');
-    Route::resource('dataTunggakan', TunggakanController::class)->middleware('admin');
+    // Admin
+    Route::resource('dataPetugas', PetugasController::class)->middleware('checkRole:Admin');
 
-    Route::get('/generateLaporan', function () {
-        $history = Pembayaran::all();
-        $dompdf = new Dompdf();
-        $html = view('dashboard.pembayaran.pdf', compact('history'))->render();
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        return $dompdf->stream('Laporan Pembayaran.pdf');
-    })->middleware('admin');
+    // Petugas
+    Route::get('/status', [StatusController::class, 'index'])->middleware('checkRole:Petugas');
+    Route::get('/status/create', [StatusController::class, 'create'])->name('status.create')->middleware('checkRole:Petugas');
 
-    // petugas
-    Route::resource('entryPembayaran', EntryPembayaranController::class)->middleware('petugas');
-    Route::resource('entryTunggakan', EntryTunggakanController::class)->middleware('petugas');
+    // Masyarakat
+    Route::resource('lelang', LelangController::class)->middleware('checkRole:Masyarakat');
+    Route::get('/masyarakat', [LelangController::class, 'index'])->middleware('checkRole:Masyarakat');
+    Route::get('/barang', [LelangController::class, 'show'])->middleware('checkRole:Masyarakat');
+    Route::post('/lelang/store', [LelangController::class, 'store'])->name('lelang.store')->middleware('checkRole:Masyarakat');
 
-    // siswa
-    Route::resource('historyPembayaran', HistorySiswaController::class)->middleware('siswa');
 });

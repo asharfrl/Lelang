@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -15,6 +16,23 @@ class Handler extends ExceptionHandler
     protected $levels = [
         //
     ];
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ValidationException) {
+    foreach ($exception->errors() as $error) {
+        if (in_array('The email has already been taken.', $error)) {
+            return redirect()->route('welcome')->with('error', 'Gunakan Alamat Email Yang Lain');
+        }
+
+        // Tambahkan kondisi untuk pesan kesalahan username unik
+        if (in_array('The username has already been taken.', $error)) {
+            return redirect()->route('welcome')->with('error', 'Gunakan Username Yang Lain');
+        }
+    }
+}
+
+    }
 
     /**
      * A list of the exception types that are not reported.

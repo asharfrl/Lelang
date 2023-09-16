@@ -18,8 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nama_petugas',
         'email',
+        'username',
         'password',
     ];
 
@@ -40,5 +41,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        // 'password' => 'hashed',
     ];
+
+    public function lelang()
+    {
+        return $this->hasMany(Lelang::class, 'user_id');
+    }
 }
